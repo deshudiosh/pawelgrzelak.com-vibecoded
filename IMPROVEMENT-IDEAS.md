@@ -1,253 +1,101 @@
-# Portfolio Website - Improvement Ideas
+# Improvement Ideas
 
-*Generated: 2025-11-25*
+*Updated: 2026-03-07*
 
----
+## Purpose
 
-## 🎨 **Priority Improvements**
+This file is a short backlog of possible improvements for the portfolio. It should stay practical and aligned with the project rules:
 
-### 1. **View Transitions API** ⭐ (The Smart New Way!)
+- pure HTML, CSS, and JavaScript
+- no frameworks
+- preserve the current visual style
+- prefer CSS animation where possible
+- prioritize performance
 
-The **View Transitions API** is a modern browser feature that creates smooth, animated transitions between page states. This would be the biggest "wow" factor for your portfolio.
+## Current Priorities
 
-**What it enables:**
-- **Smooth cross-fades** between sections
-- **Morphing animations** when clicking project cards (the card expands into the project detail page)
-- **Shared element transitions** (e.g., the project title smoothly moves from card to detail page)
-- **Native-feeling navigation** similar to mobile apps
+### 1. Video Loading
 
-**Implementation:**
-- Use `document.startViewTransition()` API
-- Add `view-transition-name` CSS properties to elements
-- Create smooth page-to-page transitions without frameworks
-- Works with single-page navigation
+- Lazy-load project videos when they approach the viewport.
+- Preload only the most important landing media.
+- Improve poster usage so loading feels faster before video playback starts.
 
-**Browser Support:** Chrome 111+, Edge 111+ (Progressive enhancement - graceful fallback for other browsers)
+Why it matters:
+- This is the highest-value performance work on a video-heavy site.
 
-**Impact:** 🔥🔥🔥 High visual impact, modern feel, sets portfolio apart
+### 2. Motion Polish
 
----
+- Add staggered reveal timing to project items.
+- Refine section transitions without making the site feel busy.
+- Keep motion subtle and mostly CSS-driven.
 
-### 2. **Performance & Loading Optimizations**
+Why it matters:
+- Improves perceived quality without changing the visual language.
 
-#### Lazy Loading for Project Videos
-- Only load videos when they're about to enter the viewport
-- You already have IntersectionObserver for reveals - extend it for video loading
-- Reduces initial page load time significantly
+### 3. Navigation and Scroll Feedback
 
-#### Blur-up Technique
-- Show a tiny blurred version of videos while the full version loads
-- Creates perception of faster loading
-- Similar to Medium's image loading technique
+- Add a simple scroll progress indicator.
+- Review scroll-triggered nav timing and smoothness.
+- Consider a light parallax effect only if it does not hurt performance.
 
-#### Preload Critical Assets
-- Use `<link rel="preload">` for the landing video
-- Prioritize above-the-fold content
-- Faster perceived load time
+Why it matters:
+- Small feedback improvements can make the site feel more deliberate.
 
-**Implementation:**
-```html
-<link rel="preload" as="video" href="assets/landing_hor-desktop-1080p.mp4">
-```
+### 4. Project Presentation
 
-**Impact:** 🚀 Better performance scores, faster perceived load times
+- Add project detail pages for stronger storytelling.
+- Expand projects with more media, process shots, or short case-study text.
+- Consider lightweight filtering only if the number of projects grows enough to justify it.
 
----
+Why it matters:
+- Better content structure is often more valuable than decorative interaction.
 
-### 3. **Enhanced Interactions**
-
-#### Magnetic Cursor Effect
-- Make interactive elements (buttons, project cards) subtly "pull" the cursor toward them
-- Adds premium, playful feel
-- Popular on high-end creative portfolios
-
-#### Custom Cursor
-- Replace default cursor with custom design
-- Changes appearance on hover (e.g., "View" text on project cards)
-- Reinforces brand identity
-
-#### Parallax Scrolling
-- Make the landing video scroll at a different speed than content
-- Creates depth and visual interest
-- Subtle effect works best (avoid overdoing it)
-
-#### Smooth Scroll with Momentum
-- Replace native scroll with a library like **Lenis**
-- Buttery-smooth scrolling with inertia
-- Professional, app-like feel
-
-**Impact:** ✨ Premium feel, increased engagement
-
----
-
-## 🎯 **Project Grid Enhancements**
-
-### Staggered Reveal Animations
-- Projects appear one after another with slight delay
-- More dynamic than all appearing at once
-- Easy to implement with existing IntersectionObserver
-
-### Video Preview on Hover
-- Show a different clip or zoom effect when hovering
-- Could swap to a "highlight reel" version
-- Increases interactivity
-
-### Filter/Category System
-- Add buttons to filter projects by type (animation, modeling, VFX, etc.)
-- Smooth filtering animations
-- Better organization as portfolio grows
-
-### Infinite Scroll or Pagination
-- Load more projects as user scrolls
-- Keeps initial page load fast
-- Better for large portfolios
-
-**Impact:** 📊 Better content organization, scalability
-
----
-
-## 📱 **Mobile Experience Improvements**
-
-### Swipe Gestures
-- Swipe between projects on mobile
-- Native app-like interaction
-- Use libraries like Hammer.js or Swiper.js
-
-### Pull-to-Refresh
-- Custom pull-to-refresh animation
-- Adds polish to mobile experience
-- Can trigger content updates or animations
-
-### Better Touch Feedback
-- Visual ripple effects on tap
-- Haptic feedback simulation
-- Clearer interaction states
-
-**Impact:** 📱 Better mobile UX, native app feel
-
----
-
-## 🎨 **Visual Polish**
-
-### Animated Grain/Noise Texture
-- Make the background noise texture subtly animate
-- Adds life to static backgrounds
-- Very subtle, shouldn't distract
-
-### Color Theme Switcher
-- Toggle between different color palettes
-- Light/dark mode or multiple themes
-- User preference saved in localStorage
-
-### Scroll Progress Indicator
-- Thin line at top showing scroll progress
-- Helps users understand page length
-- Subtle visual feedback
-
-### Section Transitions
-- Unique transitions between sections
-- Not just fade-in - try slide, scale, or custom effects
-- Adds variety and interest
-
-**Impact:** 💎 Premium polish, attention to detail
-
----
-
-## 📄 **Content Enhancements**
-
-### Project Detail Pages
-- Individual pages for each project with more images/videos
-- Multiple angles, process shots, final renders
-- Better storytelling
-
-### Case Studies
-- Detailed breakdowns of creative process
-- Tools used, techniques, challenges overcome
-- Shows expertise and thought process
-
-### Skills Section
-- Showcase tools and techniques (Blender, Houdini, etc.)
-- Skill level indicators
-- Certifications or achievements
-
-### Testimonials
-- Client feedback if applicable
-- Social proof builds credibility
-- Can be subtle quotes or dedicated section
-
-**Impact:** 📚 Better storytelling, credibility
-
----
-
-## 🏆 **Top 3 Recommendations**
-
-### 1. **View Transitions API** 
-- Biggest "wow" factor
-- Modern, cutting-edge technique
-- Sets portfolio apart from competitors
-- **Difficulty:** Medium | **Impact:** Very High
-
-### 2. **Lazy Loading + Blur-up for Videos**
-- Huge performance improvement
-- Better user experience
-- Measurable impact on load times
-- **Difficulty:** Easy | **Impact:** High
-
-### 3. **Magnetic Cursor + Custom Cursor**
-- Premium feel with minimal effort
-- Quick to implement
-- Memorable interaction
-- **Difficulty:** Easy | **Impact:** Medium-High
-
----
-
-## 📋 **Implementation Priority**
-
-### Phase 1: Quick Wins (1-2 days)
-- [ ] Lazy loading for project videos
-- [ ] Staggered reveal animations
-- [ ] Scroll progress indicator
-- [ ] Custom cursor
-
-### Phase 2: Performance (2-3 days)
-- [ ] Blur-up technique for videos
-- [ ] Preload critical assets
-- [ ] Image/video optimization review
-- [ ] Lighthouse performance audit
-
-### Phase 3: Advanced Features (3-5 days)
-- [ ] View Transitions API implementation
-- [ ] Magnetic cursor effect
-- [ ] Smooth scroll with Lenis
-- [ ] Parallax effects
-
-### Phase 4: Content & Polish (ongoing)
-- [ ] Project detail pages
-- [ ] Case studies
-- [ ] Filter/category system
-- [ ] Mobile swipe gestures
-
----
-
-## 🔗 **Useful Resources**
+## Secondary Ideas
 
 ### View Transitions API
-- [Chrome Developers Guide](https://developer.chrome.com/docs/web-platform/view-transitions/)
-- [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API)
-- [Examples & Demos](https://live-transitions.pages.dev/)
 
-### Smooth Scroll
-- [Lenis by Studio Freight](https://github.com/studio-freight/lenis)
-- [Locomotive Scroll](https://locomotivemtl.github.io/locomotive-scroll/)
+- Useful for page-to-page or card-to-detail transitions.
+- Should be treated as progressive enhancement.
+- Worth doing only after loading performance is in good shape.
+
+### Smooth Motion Library
+
+- A lightweight smooth-scroll library such as `Lenis` could make the site feel more polished.
+- This should be evaluated carefully against bundle cost, scroll behavior, and mobile performance.
+- Only worth adding if the benefit is clearly visible and the implementation stays simple.
 
 ### Cursor Effects
-- [Custom Cursor Tutorial](https://tympanus.net/codrops/2019/01/31/custom-cursor-effects/)
-- [Magnetic Buttons](https://tympanus.net/codrops/2018/06/01/magnetic-buttons/)
 
-### Performance
-- [Web.dev Performance Guide](https://web.dev/performance/)
-- [Lazy Loading Videos](https://web.dev/lazy-loading-video/)
+- Custom cursor or magnetic hover effects could add polish.
+- These should stay subtle and should not interfere with usability.
+- Lower priority than performance and content improvements.
 
----
+### Animated Texture
 
-*These ideas are suggestions to enhance the portfolio. Implement based on time, priority, and desired impact.*
+- A very subtle animated grain layer could add depth.
+- Only worth testing if it has negligible performance cost.
+
+## Ideas to Treat Carefully
+
+- Smooth-scroll libraries add weight and should not be a default choice.
+- Swipe systems, pull-to-refresh, or app-like gestures are probably unnecessary for this site.
+- Theme switching is not a priority unless there is a strong design reason for it.
+- Infinite scroll or pagination should wait until content size actually requires it.
+
+## Suggested Order
+
+1. Lazy loading for project videos
+2. Preload review for above-the-fold media
+3. Staggered reveal polish
+4. Scroll progress indicator
+5. Project detail pages
+6. View Transitions API
+
+## Rule for New Ideas
+
+Before adding a feature, check:
+
+- Does it improve performance, clarity, or presentation?
+- Does it fit the current visual style?
+- Can it be done without a framework?
+- Is it worth the extra page weight and maintenance?
