@@ -1,6 +1,9 @@
 @echo off
 setlocal enabledelayedexpansion
 
+set "ROOT_DIR=%~dp0.."
+set "ASSETS_DIR=%ROOT_DIR%\assets"
+
 echo ========================================
 echo Video Converter for Portfolio Website
 echo ========================================
@@ -30,7 +33,7 @@ if "%~1"=="" (
 )
 
 REM Create assets folder if it doesn't exist
-if not exist "assets" mkdir assets
+if not exist "%ASSETS_DIR%" mkdir "%ASSETS_DIR%"
 
 echo Processing videos...
 echo.
@@ -75,15 +78,15 @@ echo.
 
 REM Generate output filenames based on orientation, preserving original filename
 if "!orientation!"=="desktop" (
-    set "output_1080p=assets\%filename%-desktop-1080p.mp4"
-    set "output_720p=assets\%filename%-desktop-720p.webm"
-    set "poster=assets\%filename%-desktop-poster.jpg"
+    set "output_1080p=%ASSETS_DIR%\%filename%-desktop-1080p.mp4"
+    set "output_720p=%ASSETS_DIR%\%filename%-desktop-720p.webm"
+    set "poster=%ASSETS_DIR%\%filename%-desktop-poster.jpg"
     set "scale_1080p=1920:1080"
     set "scale_720p=1280:720"
 ) else (
-    set "output_720p_mp4=assets\%filename%-mobile-720p.mp4"
-    set "output_480p=assets\%filename%-mobile-480p.webm"
-    set "poster=assets\%filename%-mobile-poster.jpg"
+    set "output_720p_mp4=%ASSETS_DIR%\%filename%-mobile-720p.mp4"
+    set "output_480p=%ASSETS_DIR%\%filename%-mobile-480p.webm"
+    set "poster=%ASSETS_DIR%\%filename%-mobile-poster.jpg"
     set "scale_720p_mp4=720:1280"
     set "scale_480p=480:854"
 )

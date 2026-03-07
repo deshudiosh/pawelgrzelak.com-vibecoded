@@ -53,14 +53,19 @@ Static portfolio site for a 3D artist. The site is video-first, runs on GitHub P
 
 ```text
 pawelgrzelak.com-vibecoded/
+|- README.md
+|- AGENTS.md
+|- docs/
+|  |- PROJECT-DOCS.md
+|  `- IMPROVEMENT-IDEAS.md
 |- index.html
 |- project-template.html
 |- style.css
 |- script.js
-|- convert-videos.bat
-|- optimize-images.bat
-|- optimize-images.ps1
-|- generate_noise.py
+|- utility_scripts/
+|  |- convert-videos.bat
+|  |- optimize-images.bat
+|  `- optimize-images.ps1
 `- assets/
 ```
 
@@ -80,14 +85,14 @@ pawelgrzelak.com-vibecoded/
 
 ### Videos
 
-1. Convert source videos with `convert-videos.bat`.
+1. Convert source videos with `utility_scripts/convert-videos.bat`.
 2. Confirm the correct desktop or mobile orientation output.
 3. Verify file sizes are reasonable before committing.
 4. Generate or keep poster images for every video.
 
 ### Images
 
-1. Optimize poster images before deployment.
+1. Optimize poster images before deployment with `utility_scripts/optimize-images.bat`.
 2. Review image quality after compression.
 
 ### Site Updates
