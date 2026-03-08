@@ -72,14 +72,21 @@ pawelgrzelak.com-vibecoded/
 ## Asset Conventions
 
 - Landing and project videos should follow a clear desktop/mobile naming pattern.
-- Desktop assets should include:
-  - `*-desktop-1080p.mp4`
-  - `*-desktop-720p.webm`
-  - `*-desktop-poster.jpg`
-- Mobile assets should include:
-  - `*-mobile-720p.mp4`
-  - `*-mobile-480p.webm`
-  - `*-mobile-poster.jpg`
+- Treat landing video and project thumbnail video as separate asset types.
+- For now, define thumbnail video rules only for the homepage.
+- Recommended resolutions:
+
+  | Asset                     | Desktop Max                    | Desktop Min                    | Mobile Max                     | Mobile Min                    |
+  | ------------------------- | ------------------------------ | ------------------------------ | ------------------------------ | ----------------------------- |
+  | Landing video             | `1920x1080` (`AV1.mp4`)        | `1280x720` (`VP9.webm`)        | `1080x1920` (`AV1.mp4`)        | `720x1280` (`VP9.webm`)       |
+  | Project thumbnail video*  | `1440x810` (`AV1.mp4`)         | `960x540` (`VP9.webm`)         | `900x1600` (`AV1.mp4`)         | `540x960` (`VP9.webm`)        |
+
+  \* Mobile values for project thumbnail video may change later. Mobile thumbnail margins are not defined yet.
+
+- Each video type should have separate desktop and mobile exports.
+- Every video should have a matching `.jpg` poster image.
+- Future note: it may still be worth adding an extra `H.264 / MP4` fallback later if browser testing shows real gaps on older devices.
+- File names should follow the current `assets` structure, for example: `projectname-desktop-1080p.mp4`, `projectname-mobile-480p.webm`, `projectname-mobile-poster.jpg`.
 
 ## Workflow
 
@@ -127,4 +134,4 @@ pawelgrzelak.com-vibecoded/
 - Keep secrets and API keys out of repository documentation.
 - If implementation details drift, the source of truth is the actual codebase, not this file.
 
-*Last updated: 2026-03-07*
+*Last updated: 2026-03-08*

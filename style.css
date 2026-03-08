@@ -290,6 +290,14 @@ main {
     margin: 0 auto;
 }
 
+@media (min-width: 769px) {
+    .nav-container,
+    .container {
+        max-width: 1440px;
+        width: min(1440px, calc(100% - clamp(96px, 12vw, 192px)));
+    }
+}
+
 .section-title {
     font-size: 3rem; /* Larger title */
     margin-bottom: 80px; /* More space below title */
