@@ -160,8 +160,7 @@ function hydrateProjectPage() {
         return;
     }
 
-    const params = new URLSearchParams(window.location.search);
-    const projectSlug = params.get('project');
+    const projectSlug = getProjectSlug();
     const fallbackSlug = Object.keys(PROJECTS)[0];
     const activeSlug = PROJECTS[projectSlug] ? projectSlug : fallbackSlug;
     const project = PROJECTS[activeSlug];
@@ -193,28 +192,28 @@ function hydrateProjectPage() {
     }
 
     if (video) {
-        video.poster = project.poster;
+        video.poster = getAssetPath(project.poster);
     }
 
     if (video && videoSource) {
-        videoSource.src = project.video;
+        videoSource.src = getAssetPath(project.video);
         video.load();
     }
 
     if (backLink) {
-        backLink.href = 'index.html';
+        backLink.href = '../';
     }
 
     if (prevLink) {
         prevLink.href = getProjectHref(navigation.prevSlug);
         prevLink.dataset.project = navigation.prevSlug;
-        prevLink.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.42)), url("${PROJECTS[navigation.prevSlug].poster}")`;
+        prevLink.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.42)), url("${getAssetPath(PROJECTS[navigation.prevSlug].poster)}")`;
     }
 
     if (nextLink) {
         nextLink.href = getProjectHref(navigation.nextSlug);
         nextLink.dataset.project = navigation.nextSlug;
-        nextLink.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.42)), url("${PROJECTS[navigation.nextSlug].poster}")`;
+        nextLink.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.42)), url("${getAssetPath(PROJECTS[navigation.nextSlug].poster)}")`;
     }
 
     if (prevName) {
@@ -342,7 +341,37 @@ function getProjectNavigation(activeSlug) {
 }
 
 function getProjectHref(projectSlug) {
-    return `project-template.html?project=${projectSlug}`;
+    if (document.body.dataset.page === 'project') {
+        return `../${projectSlug}/`;
+    }
+
+    return `${projectSlug}/`;
+}
+
+function getProjectSlug() {
+    const bodySlug = document.body.dataset.project;
+
+    if (bodySlug) {
+        return bodySlug;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const querySlug = params.get('project');
+
+    if (querySlug) {
+        return querySlug;
+    }
+
+    const pathSegments = window.location.pathname.split('/').filter(Boolean);
+    return pathSegments[pathSegments.length - 1] || '';
+}
+
+function getAssetPath(assetPath) {
+    if (document.body.dataset.page === 'project') {
+        return `../${assetPath}`;
+    }
+
+    return assetPath;
 }
 
 function restoreIndexScrollPosition() {
