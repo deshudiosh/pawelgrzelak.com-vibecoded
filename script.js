@@ -1,119 +1,377 @@
+const PROJECTS = {
+    'natures-pulse': {
+        title: "Nature's Pulse",
+        subtitle: 'Personal Animation / 2025',
+        description: 'Organic motion study exploring branching forms, soft turbulence, and rhythmic light.',
+        poster: 'assets/placeholder-poster.jpg',
+        video: 'assets/placeholder-video.mp4'
+    },
+    'ethereal-flow': {
+        title: 'Ethereal Flow',
+        subtitle: 'Motion Design / 2025',
+        description: 'A quieter atmospheric piece built around fluid silhouettes, bloom, and suspended movement.',
+        poster: 'assets/placeholder-poster.jpg',
+        video: 'assets/placeholder-video.mp4'
+    },
+    'abstract-life': {
+        title: 'Abstract Life',
+        subtitle: 'Experimental CGI / 2024',
+        description: 'A more graphic study of living systems translated into bold abstract animation.',
+        poster: 'assets/placeholder-poster.jpg',
+        video: 'assets/placeholder-video.mp4'
+    }
+};
+
+const ACTIVE_PROJECT_KEY = 'active-project-transition';
+const INDEX_SCROLL_KEY = 'index-scroll-position';
+const INDEX_RETURN_KEY = 'index-return-pending';
+const PROJECT_ORDER = Object.keys(PROJECTS);
+
 document.addEventListener('DOMContentLoaded', () => {
+    hydrateProjectPage();
+    restoreIndexScrollPosition();
+    initNavVisibility();
+    initHamburgerMenu();
+    initAnchorScrolling();
+    initRevealAnimations();
+    initViewTransitions();
+});
+
+function initNavVisibility() {
     const nav = document.getElementById('main-nav');
     const landingSection = document.getElementById('landing');
     const scrollIndicator = document.querySelector('.scroll-indicator');
-    
-    // Show nav after scrolling past landing page (or a portion of it)
-    // Also handle scroll indicator visibility
+
+    if (!nav || !landingSection || !scrollIndicator) {
+        return;
+    }
+
     window.addEventListener('scroll', () => {
-        const triggerPoint = landingSection.offsetHeight * 0.5; // Trigger at 50% of landing
-        
-        // Navigation visibility
+        const triggerPoint = landingSection.offsetHeight * 0.5;
+
         if (window.scrollY > triggerPoint) {
             nav.classList.add('visible');
-        } else {
-            nav.classList.remove('visible');
-        }
-        
-        // Hide scroll indicator after scrolling past half of landing page
-        if (window.scrollY > triggerPoint) {
             scrollIndicator.classList.add('hidden');
         } else {
+            nav.classList.remove('visible');
             scrollIndicator.classList.remove('hidden');
         }
     });
+}
 
-    // Hamburger menu toggle
+function initHamburgerMenu() {
+    const nav = document.getElementById('main-nav');
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-    // nav is already defined at the top of the file
-    
+
+    if (!nav || !hamburger || !navLinks) {
+        return;
+    }
+
     function toggleMenu() {
         const isActive = hamburger.classList.contains('active');
-        
+
         if (!isActive) {
-            // Open menu
             hamburger.classList.add('active');
             navLinks.classList.add('active');
             nav.classList.add('mobile-active');
-            document.body.style.overflow = 'hidden'; // Lock scroll
-        } else {
-            // Close menu
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-            nav.classList.remove('mobile-active');
-            document.body.style.overflow = ''; // Unlock scroll
+            document.body.style.overflow = 'hidden';
+            return;
         }
+
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        nav.classList.remove('mobile-active');
+        document.body.style.overflow = '';
     }
-    
-    hamburger.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent triggering document click if we add one later
+
+    hamburger.addEventListener('click', (event) => {
+        event.stopPropagation();
         toggleMenu();
     });
-    
-    // Close menu when clicking anywhere on the overlay (links or background)
+
     navLinks.addEventListener('click', () => {
         if (hamburger.classList.contains('active')) {
             toggleMenu();
         }
     });
+}
 
-    // Smooth scroll for anchor links with View Transitions API
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                // Check if View Transitions API is supported
-                if (document.startViewTransition) {
-                    // Use View Transitions API for smooth animated transition
-                    document.startViewTransition(() => {
-                        targetSection.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    });
-                } else {
-                    // Fallback for browsers that don't support View Transitions
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+function initAnchorScrolling() {
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+
+    anchorLinks.forEach((anchor) => {
+        anchor.addEventListener('click', (event) => {
+            const targetId = anchor.getAttribute('href');
+            const targetSection = targetId ? document.querySelector(targetId) : null;
+
+            if (!targetSection) {
+                return;
             }
+
+            event.preventDefault();
+            targetSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         });
     });
+}
 
-    // Scroll Reveal Animation
+function initRevealAnimations() {
     const revealElements = document.querySelectorAll('.reveal');
 
+    if (!revealElements.length) {
+        return;
+    }
+
     const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Check if it's a project card for staggered animation
-                if (entry.target.classList.contains('project-card')) {
-                    // Get all project cards
-                    const projectCards = document.querySelectorAll('.project-card');
-                    const index = Array.from(projectCards).indexOf(entry.target);
-                    
-                    // Add staggered delay (150ms per card)
-                    setTimeout(() => {
-                        entry.target.classList.add('active');
-                    }, index * 150);
-                } else {
-                    // Non-project elements reveal immediately
-                    entry.target.classList.add('active');
-                }
-                observer.unobserve(entry.target); // Only animate once
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+                return;
             }
+
+            if (entry.target.classList.contains('project-card')) {
+                const projectCards = document.querySelectorAll('.project-card');
+                const index = Array.from(projectCards).indexOf(entry.target);
+
+                setTimeout(() => {
+                    entry.target.classList.add('active');
+                }, index * 150);
+            } else {
+                entry.target.classList.add('active');
+            }
+
+            observer.unobserve(entry.target);
         });
     }, {
         root: null,
-        threshold: 0.15, // Trigger when 15% of element is visible
-        rootMargin: "0px 0px -50px 0px"
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
     });
 
-    revealElements.forEach(el => {
-        revealObserver.observe(el);
+    revealElements.forEach((element) => {
+        revealObserver.observe(element);
     });
-});
+}
+
+function hydrateProjectPage() {
+    if (document.body.dataset.page !== 'project') {
+        return;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const projectSlug = params.get('project');
+    const fallbackSlug = Object.keys(PROJECTS)[0];
+    const activeSlug = PROJECTS[projectSlug] ? projectSlug : fallbackSlug;
+    const project = PROJECTS[activeSlug];
+    const navigation = getProjectNavigation(activeSlug);
+
+    document.body.dataset.project = activeSlug;
+
+    const title = document.querySelector('.project-title');
+    const subtitle = document.querySelector('.project-subtitle');
+    const copy = document.querySelector('.project-copy');
+    const video = document.querySelector('.project-video');
+    const videoSource = document.querySelector('.project-video-source');
+    const backLink = document.querySelector('.back-link');
+    const prevLink = document.querySelector('.project-nav-prev');
+    const nextLink = document.querySelector('.project-nav-next');
+    const prevName = document.querySelector('.project-nav-prev .project-nav-name');
+    const nextName = document.querySelector('.project-nav-next .project-nav-name');
+
+    if (title) {
+        title.textContent = project.title;
+    }
+
+    if (subtitle) {
+        subtitle.textContent = project.subtitle;
+    }
+
+    if (copy) {
+        copy.textContent = project.description;
+    }
+
+    if (video) {
+        video.poster = project.poster;
+    }
+
+    if (video && videoSource) {
+        videoSource.src = project.video;
+        video.load();
+    }
+
+    if (backLink) {
+        backLink.href = 'index.html';
+    }
+
+    if (prevLink) {
+        prevLink.href = getProjectHref(navigation.prevSlug);
+        prevLink.dataset.project = navigation.prevSlug;
+        prevLink.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.42)), url("${PROJECTS[navigation.prevSlug].poster}")`;
+    }
+
+    if (nextLink) {
+        nextLink.href = getProjectHref(navigation.nextSlug);
+        nextLink.dataset.project = navigation.nextSlug;
+        nextLink.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.42)), url("${PROJECTS[navigation.nextSlug].poster}")`;
+    }
+
+    if (prevName) {
+        prevName.textContent = PROJECTS[navigation.prevSlug].title;
+    }
+
+    if (nextName) {
+        nextName.textContent = PROJECTS[navigation.nextSlug].title;
+    }
+
+    document.title = `${project.title} | Paweł Grzelak`;
+}
+
+function initViewTransitions() {
+    setSharedNavTransition();
+
+    if (!supportsViewTransitions()) {
+        return;
+    }
+
+    if (document.body.dataset.page === 'project') {
+        prepareProjectPageTransition();
+        return;
+    }
+
+    prepareIndexPageTransitions();
+}
+
+function setSharedNavTransition() {
+    const logo = document.querySelector('.logo');
+
+    if (logo) {
+        logo.style.viewTransitionName = 'site-logo';
+    }
+}
+
+function prepareIndexPageTransitions() {
+    const storedProject = sessionStorage.getItem(ACTIVE_PROJECT_KEY);
+
+    if (storedProject) {
+        applyProjectTransitionNames(storedProject);
+    }
+
+    document.querySelectorAll('.project-card').forEach((card) => {
+        card.addEventListener('click', () => {
+            const projectSlug = card.dataset.project;
+
+            if (!projectSlug) {
+                return;
+            }
+
+            sessionStorage.setItem(INDEX_SCROLL_KEY, String(window.scrollY));
+            sessionStorage.setItem(ACTIVE_PROJECT_KEY, projectSlug);
+            applyProjectTransitionNames(projectSlug);
+        });
+    });
+}
+
+function prepareProjectPageTransition() {
+    const projectSlug = document.body.dataset.project;
+
+    if (!projectSlug) {
+        return;
+    }
+
+    const expectedSlug = sessionStorage.getItem(ACTIVE_PROJECT_KEY);
+    const activeSlug = expectedSlug || projectSlug;
+    const mediaContainer = document.querySelector('.project-video-container');
+    const projectTitle = document.querySelector('.project-title');
+    const backLink = document.querySelector('.back-link');
+
+    if (mediaContainer) {
+        mediaContainer.style.viewTransitionName = `project-media-${activeSlug}`;
+    }
+
+    if (projectTitle) {
+        projectTitle.style.viewTransitionName = `project-title-${activeSlug}`;
+    }
+
+    if (backLink) {
+        backLink.addEventListener('click', () => {
+            sessionStorage.setItem(INDEX_RETURN_KEY, 'true');
+            sessionStorage.setItem(ACTIVE_PROJECT_KEY, projectSlug);
+        });
+    }
+
+    document.querySelectorAll('.project-nav-link').forEach((link) => {
+        link.addEventListener('click', () => {
+            const targetSlug = link.dataset.project;
+
+            if (targetSlug) {
+                sessionStorage.setItem(ACTIVE_PROJECT_KEY, targetSlug);
+            }
+        });
+    });
+}
+
+function applyProjectTransitionNames(activeSlug) {
+    document.querySelectorAll('.project-card').forEach((card) => {
+        const isActive = card.dataset.project === activeSlug;
+        const title = card.querySelector('h3');
+
+        card.style.viewTransitionName = isActive ? `project-media-${activeSlug}` : 'none';
+
+        if (title) {
+            title.style.viewTransitionName = isActive ? `project-title-${activeSlug}` : 'none';
+        }
+    });
+}
+
+function supportsViewTransitions() {
+    return typeof document.startViewTransition === 'function';
+}
+
+function getProjectNavigation(activeSlug) {
+    const currentIndex = PROJECT_ORDER.indexOf(activeSlug);
+    const safeIndex = currentIndex === -1 ? 0 : currentIndex;
+    const prevIndex = (safeIndex - 1 + PROJECT_ORDER.length) % PROJECT_ORDER.length;
+    const nextIndex = (safeIndex + 1) % PROJECT_ORDER.length;
+
+    return {
+        prevSlug: PROJECT_ORDER[prevIndex],
+        nextSlug: PROJECT_ORDER[nextIndex]
+    };
+}
+
+function getProjectHref(projectSlug) {
+    return `project-template.html?project=${projectSlug}`;
+}
+
+function restoreIndexScrollPosition() {
+    if (document.body.dataset.page === 'project') {
+        return;
+    }
+
+    const shouldRestore =
+        sessionStorage.getItem(INDEX_RETURN_KEY) === 'true' ||
+        getNavigationType() === 'back_forward';
+    const savedScrollY = Number(sessionStorage.getItem(INDEX_SCROLL_KEY));
+
+    if (!shouldRestore || Number.isNaN(savedScrollY)) {
+        return;
+    }
+
+    sessionStorage.removeItem(INDEX_RETURN_KEY);
+    document.documentElement.classList.add('disable-smooth-scroll');
+
+    requestAnimationFrame(() => {
+        window.scrollTo(0, savedScrollY);
+
+        requestAnimationFrame(() => {
+            document.documentElement.classList.remove('disable-smooth-scroll');
+        });
+    });
+}
+
+function getNavigationType() {
+    const navigationEntry = performance.getEntriesByType('navigation')[0];
+    return navigationEntry ? navigationEntry.type : '';
+}
