@@ -3,7 +3,8 @@
 
 param(
     [Parameter(ValueFromRemainingArguments=$true)]
-    [string[]]$Files
+    [string[]]$Files,
+    [switch]$NoPause
 )
 
 Write-Host "========================================" -ForegroundColor Cyan
@@ -73,6 +74,7 @@ function Compress-Image {
 $totalOriginalSize = 0
 $totalOptimizedSize = 0
 $processedCount = 0
+$hadErrors = $false
 
 foreach ($file in $Files) {
     if (-not (Test-Path $file)) {
@@ -120,6 +122,7 @@ foreach ($file in $Files) {
     }
     catch {
         Write-Host "  ERROR: $($_.Exception.Message)" -ForegroundColor Red
+        $hadErrors = $true
         # Clean up temp file if it exists
         if (Test-Path "$file.tmp") {
             Remove-Item "$file.tmp" -Force
@@ -147,4 +150,10 @@ else {
 }
 
 Write-Host ""
-Read-Host "Press Enter to exit"
+if (-not $NoPause) {
+    Read-Host "Press Enter to exit"
+}
+
+if ($processedCount -eq 0 -and $hadErrors) {
+    exit 1
+}

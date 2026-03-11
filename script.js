@@ -1,4 +1,18 @@
 const PROJECTS = {
+    'specimens-vol2': {
+        title: 'Specimens vol2',
+        subtitle: 'Personal Animation / 2026',
+        description: 'New work. Description coming soon.',
+        poster: 'assets/specimens_vol2-desktop-desktop-poster.jpg',
+        video: 'assets/specimens_vol2-desktop-desktop-1440x810.mp4'
+    },
+    'embroidery': {
+        title: 'Embroidery',
+        subtitle: 'Personal Animation / 2026',
+        description: 'New work. Description coming soon.',
+        poster: 'assets/embroidery-desktop-desktop-poster.jpg',
+        video: 'assets/embroidery-desktop-desktop-1440x810.mp4'
+    },
     'natures-pulse': {
         title: "Nature's Pulse",
         subtitle: 'Personal Animation / 2025',
@@ -198,6 +212,9 @@ function hydrateProjectPage() {
     if (video && videoSource) {
         videoSource.src = getAssetPath(project.video);
         video.load();
+
+        // Autoplay can be flaky when sources are swapped dynamically; try to start playback.
+        video.play().catch(() => {});
     }
 
     if (backLink) {

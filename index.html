@@ -8,6 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" href="assets/favicons/favicon.ico" sizes="any">
 </head>
 <body>
 
@@ -15,16 +19,16 @@
     <header id="landing">
         <div class="video-wrapper">
             <!-- Desktop (landscape 16:9) video -->
-            <video class="bg-video desktop" autoplay muted loop playsinline poster="assets/landing_hor-desktop-poster.jpg">
-                <source src="assets/landing_hor-desktop-1080p.mp4" type="video/mp4" media="(min-width: 768px)">
-                <source src="assets/landing_hor-desktop-720p.webm" type="video/webm" media="(min-width: 768px)">
+            <video class="bg-video desktop" autoplay muted loop playsinline poster="assets/landing-desktop-poster.jpg">
+                <source src="assets/landing-desktop-1920x1080.mp4" type="video/mp4" media="(min-width: 768px)">
+                <source src="assets/landing-desktop-1280x720.webm" type="video/webm" media="(min-width: 768px)">
                 Your browser does not support the video tag.
             </video>
 
             <!-- Mobile (portrait 9:16) video -->
-            <video class="bg-video mobile" autoplay muted loop playsinline poster="assets/landing_ver-mobile-poster.jpg">
-                <source src="assets/landing_ver-mobile-720p.mp4" type="video/mp4" media="(max-width: 767px)">
-                <source src="assets/landing_ver-mobile-480p.webm" type="video/webm" media="(max-width: 767px)">
+            <video class="bg-video mobile" autoplay muted loop playsinline poster="assets/landing-mobile-poster.jpg">
+                <source src="assets/landing-mobile-900x1600.mp4" type="video/mp4" media="(max-width: 767px)">
+                <source src="assets/landing-mobile-540x960.webm" type="video/webm" media="(max-width: 767px)">
                 Your browser does not support the video tag.
             </video>
 
@@ -73,6 +77,44 @@
                 <h2 class="section-title reveal">Selected Work</h2>
                 <div class="projects-grid">
                     <!-- Projects will be injected here or hardcoded later -->
+                    <a href="specimens-vol2/" class="project-card reveal" data-project="specimens-vol2">
+                        <!-- Desktop (landscape) thumbnail video -->
+                        <video class="project-thumb desktop" autoplay muted loop playsinline poster="assets/specimens_vol2-desktop-desktop-poster.jpg">
+                            <source src="assets/specimens_vol2-desktop-desktop-1440x810.mp4" type="video/mp4" media="(min-width: 768px)">
+                            <source src="assets/specimens_vol2-desktop-desktop-960x540.webm" type="video/webm" media="(min-width: 768px)">
+                            Your browser does not support the video tag.
+                        </video>
+
+                        <!-- Mobile (portrait) thumbnail video -->
+                        <video class="project-thumb mobile" autoplay muted loop playsinline poster="assets/specimens_vol2-mobile-mobile-poster.jpg">
+                            <source src="assets/specimens_vol2-mobile-mobile-900x1600.mp4" type="video/mp4" media="(max-width: 767px)">
+                            <source src="assets/specimens_vol2-mobile-mobile-540x960.webm" type="video/webm" media="(max-width: 767px)">
+                            Your browser does not support the video tag.
+                        </video>
+
+                        <div class="project-info">
+                            <h3>Specimens vol2</h3>
+                        </div>
+                    </a>
+                    <a href="embroidery/" class="project-card reveal" data-project="embroidery">
+                        <!-- Desktop (landscape) thumbnail video -->
+                        <video class="project-thumb desktop" autoplay muted loop playsinline poster="assets/embroidery-desktop-desktop-poster.jpg">
+                            <source src="assets/embroidery-desktop-desktop-1440x810.mp4" type="video/mp4" media="(min-width: 768px)">
+                            <source src="assets/embroidery-desktop-desktop-960x540.webm" type="video/webm" media="(min-width: 768px)">
+                            Your browser does not support the video tag.
+                        </video>
+
+                        <!-- Mobile (portrait) thumbnail video -->
+                        <video class="project-thumb mobile" autoplay muted loop playsinline poster="assets/embroidery-mobile-mobile-poster.jpg">
+                            <source src="assets/embroidery-mobile-mobile-900x1600.mp4" type="video/mp4" media="(max-width: 767px)">
+                            <source src="assets/embroidery-mobile-mobile-540x960.webm" type="video/webm" media="(max-width: 767px)">
+                            Your browser does not support the video tag.
+                        </video>
+
+                        <div class="project-info">
+                            <h3>Embroidery</h3>
+                        </div>
+                    </a>
                     <a href="natures-pulse/" class="project-card reveal" data-project="natures-pulse">
                         <video autoplay muted loop playsinline poster="assets/placeholder-poster.jpg">
                             <source src="assets/placeholder-video.mp4" type="video/mp4">

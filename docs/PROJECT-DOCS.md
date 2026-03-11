@@ -14,17 +14,6 @@ Static portfolio site for a 3D artist. The site is video-first, runs on GitHub P
 
 ## Core Decisions
 
-### Video Strategy
-
-- Landing media uses separate assets for desktop and mobile.
-- Desktop uses landscape video.
-- Mobile uses portrait video.
-- The switch happens at the `768px` breakpoint.
-- MP4 is the primary format.
-- WebM is the fallback format.
-- Videos should autoplay silently and loop.
-- Poster images should always be provided.
-
 ### Performance
 
 - Keep video files aggressively optimized before shipping.
@@ -71,22 +60,34 @@ pawelgrzelak.com-vibecoded/
 
 ## Asset Conventions
 
-- Landing and project videos should follow a clear desktop/mobile naming pattern.
+- Use separate desktop and mobile video assets.
+- Desktop uses landscape video.
+- Mobile uses portrait video.
+- The switch happens at the `768px` breakpoint.
+- Videos should autoplay muted and loop.
 - Treat landing video and project thumbnail video as separate asset types.
 - For now, define thumbnail video rules only for the homepage.
 - Recommended resolutions:
 
-  | Asset                     | Desktop Max                    | Desktop Min                    | Mobile Max                     | Mobile Min                    |
-  | ------------------------- | ------------------------------ | ------------------------------ | ------------------------------ | ----------------------------- |
-  | Landing video             | `1920x1080` (`AV1.mp4`)        | `1280x720` (`VP9.webm`)        | `1080x1920` (`AV1.mp4`)        | `720x1280` (`VP9.webm`)       |
-  | Project thumbnail video*  | `1440x810` (`AV1.mp4`)         | `960x540` (`VP9.webm`)         | `900x1600` (`AV1.mp4`)         | `540x960` (`VP9.webm`)        |
+  Desktop
+
+  | Asset                     | Max                     | Min                     |
+  | ------------------------- | ----------------------- | ----------------------- |
+  | Landing video             | `1920x1080` (`AV1.mp4`) | `1280x720` (`VP9.webm`) |
+  | Project thumbnail video   | `1440x810` (`AV1.mp4`)  | `960x540` (`VP9.webm`)  |
+
+  Mobile
+
+  | Asset                     | Max                     | Min                     |
+  | ------------------------- | ----------------------- | ----------------------- |
+  | Landing video             | `1080x1920` (`AV1.mp4`) | `720x1280` (`VP9.webm`) |
+  | Project thumbnail video*  | `900x1600` (`AV1.mp4`)  | `540x960` (`VP9.webm`)  |
 
   \* Mobile values for project thumbnail video may change later. Mobile thumbnail margins are not defined yet.
 
-- Each video type should have separate desktop and mobile exports.
 - Every video should have a matching `.jpg` poster image.
 - Future note: it may still be worth adding an extra `H.264 / MP4` fallback later if browser testing shows real gaps on older devices.
-- File names should follow the current `assets` structure, for example: `projectname-desktop-1080p.mp4`, `projectname-mobile-480p.webm`, `projectname-mobile-poster.jpg`.
+- File names should follow one explicit resolution-based structure, for example: `projectname-desktop-1920x1080.mp4`, `projectname-mobile-720x1280.webm`, `projectname-mobile-poster.jpg`.
 
 ## Workflow
 
