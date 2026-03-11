@@ -48,7 +48,6 @@ pawelgrzelak.com-vibecoded/
 |  |- PROJECT-DOCS.md
 |  `- IMPROVEMENT-IDEAS.md
 |- index.html
-|- project-template.html
 |- style.css
 |- script.js
 |- utility_scripts/

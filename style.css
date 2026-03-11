@@ -129,6 +129,10 @@ main {
     display: block;
 }
 
+.project-thumb.single {
+    display: block;
+}
+
 @media (min-width: 768px) {
     .bg-video.desktop {
         display: block;
@@ -144,6 +148,10 @@ main {
 
     .project-thumb.mobile {
         display: none;
+    }
+
+    .project-thumb.single {
+        display: block;
     }
 }
 

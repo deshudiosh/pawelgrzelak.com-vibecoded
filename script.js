@@ -13,26 +13,12 @@ const PROJECTS = {
         poster: 'assets/embroidery-desktop-desktop-poster.jpg',
         video: 'assets/embroidery-desktop-desktop-1440x810.mp4'
     },
-    'natures-pulse': {
-        title: "Nature's Pulse",
-        subtitle: 'Personal Animation / 2025',
-        description: 'Organic motion study exploring branching forms, soft turbulence, and rhythmic light.',
-        poster: 'assets/placeholder-poster.jpg',
-        video: 'assets/placeholder-video.mp4'
-    },
-    'ethereal-flow': {
-        title: 'Ethereal Flow',
-        subtitle: 'Motion Design / 2025',
-        description: 'A quieter atmospheric piece built around fluid silhouettes, bloom, and suspended movement.',
-        poster: 'assets/placeholder-poster.jpg',
-        video: 'assets/placeholder-video.mp4'
-    },
-    'abstract-life': {
-        title: 'Abstract Life',
-        subtitle: 'Experimental CGI / 2024',
-        description: 'A more graphic study of living systems translated into bold abstract animation.',
-        poster: 'assets/placeholder-poster.jpg',
-        video: 'assets/placeholder-video.mp4'
+    'mushrooms': {
+        title: 'Mushrooms',
+        subtitle: 'Personal Animation / 2026',
+        description: 'New work. Description coming soon.',
+        poster: 'assets/mushrooms-desktop-desktop-poster.jpg',
+        video: 'assets/mushrooms-desktop-desktop-1440x810.mp4'
     }
 };
 
@@ -49,6 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initAnchorScrolling();
     initRevealAnimations();
     initViewTransitions();
+    initLazyVideos();
+    initProjectThumbPlayback();
 });
 
 function initNavVisibility() {
@@ -167,6 +155,100 @@ function initRevealAnimations() {
     revealElements.forEach((element) => {
         revealObserver.observe(element);
     });
+}
+
+function initLazyVideos() {
+    const lazyVideos = document.querySelectorAll('video[data-lazy="true"]');
+
+    if (!lazyVideos.length) {
+        return;
+    }
+
+    if (!('IntersectionObserver' in window)) {
+        lazyVideos.forEach((video) => {
+            loadVideoSources(video);
+            video.preload = 'metadata';
+            video.load();
+        });
+        return;
+    }
+
+    const lazyObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+                return;
+            }
+
+            const video = entry.target;
+            loadVideoSources(video);
+            video.preload = 'metadata';
+            video.load();
+
+            if (video.autoplay) {
+                video.play().catch(() => {});
+            }
+
+            observer.unobserve(video);
+        });
+    }, {
+        rootMargin: '200px 0px',
+        threshold: 0.1
+    });
+
+    lazyVideos.forEach((video) => {
+        lazyObserver.observe(video);
+    });
+}
+
+function initProjectThumbPlayback() {
+    const thumbVideos = document.querySelectorAll('.project-thumb');
+
+    if (!thumbVideos.length || !('IntersectionObserver' in window)) {
+        return;
+    }
+
+    const playbackObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            const video = entry.target;
+
+            if (entry.isIntersecting) {
+                if (video.dataset.loaded === 'true' || video.querySelector('source[src]')) {
+                    video.play().catch(() => {});
+                }
+                return;
+            }
+
+            video.pause();
+        });
+    }, {
+        threshold: 0.35
+    });
+
+    thumbVideos.forEach((video) => {
+        playbackObserver.observe(video);
+    });
+}
+
+function loadVideoSources(video) {
+    if (video.dataset.loaded === 'true') {
+        return;
+    }
+
+    const sources = video.querySelectorAll('source');
+    let hasSource = false;
+
+    sources.forEach((source) => {
+        const dataSrc = source.dataset.src;
+
+        if (dataSrc) {
+            source.src = dataSrc;
+            hasSource = true;
+        }
+    });
+
+    if (hasSource) {
+        video.dataset.loaded = 'true';
+    }
 }
 
 function hydrateProjectPage() {
