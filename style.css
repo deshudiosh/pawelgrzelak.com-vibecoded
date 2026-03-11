@@ -28,6 +28,19 @@ html.disable-smooth-scroll {
     scroll-behavior: auto;
 }
 
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto;
+}
+
+.lenis.lenis-stopped {
+    overflow: clip;
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 html::-webkit-scrollbar {
     display: none;
