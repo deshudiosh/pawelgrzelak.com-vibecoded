@@ -747,9 +747,16 @@ p {
     }
 }
 
+/* Contact Section */
+.contact-intro {
+    margin-bottom: 32px;
+    font-size: 1.2rem;
+}
+
 /* Contact Button */
 .btn-contact {
     display: inline-block;
+    margin-bottom: 32px;
     padding: 15px 40px;
     background: #000; /* Dark button on light bg */
     color: #fff;
@@ -760,6 +767,12 @@ p {
     text-decoration: none;
 }
 
+.btn-contact .contact-icon {
+    margin-left: 10px;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
 .btn-contact:hover {
     transform: translateY(-3px);
     background: #333;
@@ -767,12 +780,27 @@ p {
 }
 
 /* Social Links */
+.social-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .social-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-size: 1.1rem;
     font-weight: 300;
     border-bottom: 1px solid transparent;
     padding-bottom: 2px;
     color: #000; /* Dark text */
+}
+
+.social-link-icon {
+    font-size: 1rem;
+    line-height: 1;
 }
 
 .social-links a:hover {
