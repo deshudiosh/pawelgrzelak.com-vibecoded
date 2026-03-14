@@ -1,4 +1,11 @@
 const PROJECTS = {
+    'specimens': {
+        title: 'Specimens',
+        subtitle: 'Personal / 2022',
+        description: 'Archive-like studies combining still imagery, moving image and short descriptive fragments.',
+        poster: 'specimens/1174x788_spec_a.jpg',
+        video: 'assets/specimens_vol2-desktop-desktop-1440x810.mp4'
+    },
     'specimens-vol2': {
         title: 'Specimens vol2',
         subtitle: 'Personal Animation / 2026',
@@ -67,10 +74,10 @@ function initSmoothScroll() {
 
 function initNavVisibility() {
     const nav = document.getElementById('main-nav');
-    const landingSection = document.getElementById('landing');
+    const landingSection = document.getElementById('landing') || document.querySelector('.project-hero');
     const scrollIndicator = document.querySelector('.scroll-indicator');
 
-    if (!nav || !landingSection || !scrollIndicator) {
+    if (!nav || !landingSection) {
         return;
     }
 
@@ -79,10 +86,14 @@ function initNavVisibility() {
 
         if (window.scrollY > triggerPoint) {
             nav.classList.add('visible');
-            scrollIndicator.classList.add('hidden');
+            if (scrollIndicator) {
+                scrollIndicator.classList.add('hidden');
+            }
         } else {
             nav.classList.remove('visible');
-            scrollIndicator.classList.remove('hidden');
+            if (scrollIndicator) {
+                scrollIndicator.classList.remove('hidden');
+            }
         }
     }
 

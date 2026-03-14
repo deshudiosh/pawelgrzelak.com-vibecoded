@@ -427,6 +427,131 @@ footer {
     text-align: center;
 }
 
+.project-hero {
+    position: relative;
+    min-height: 72vh;
+    background: #607680;
+    overflow: hidden;
+}
+
+.project-hero-image,
+.project-hero video,
+.project-hero-video {
+    width: 100%;
+    height: 100%;
+    min-height: 72vh;
+    object-fit: cover;
+    display: block;
+}
+
+.project-hero-video.desktop {
+    display: none;
+}
+
+.project-hero-video.mobile {
+    display: block;
+}
+
+.project-shell {
+    width: min(1200px, calc(100% - 40px));
+    margin: 0 auto;
+    padding-top: 72px;
+}
+
+.project-hero-copy {
+    position: absolute;
+    left: clamp(32px, 6.4vw, 64px);
+    right: clamp(20px, 4vw, 40px);
+    bottom: clamp(36px, 8vw, 56px);
+    z-index: 2;
+    color: #fff;
+}
+
+.project-hero-copy .project-title {
+    font-size: clamp(2.4rem, 4vw, 4.5rem);
+    line-height: 0.95;
+    color: #fff;
+    text-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+    margin: 0;
+}
+
+.project-hero-copy .project-subtitle {
+    margin-top: 10px;
+    color: rgba(255, 255, 255, 0.82);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+}
+
+.project-intro-grid,
+.project-aside-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+    gap: 108px;
+    align-items: start;
+    margin-bottom: 144px;
+}
+
+.project-intro-copy {
+    max-width: 440px;
+}
+
+.project-intro-copy p + p,
+.project-aside-copy p + p {
+    margin-top: 18px;
+}
+
+.specimen-strip {
+    margin-bottom: 144px;
+}
+
+.specimen-card {
+    margin: 0;
+}
+
+.specimen-media {
+    width: 100%;
+    display: block;
+    background: #71858e;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.specimen-media-placeholder {
+    display: grid;
+    place-items: center;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: clamp(1.3rem, 2.5vw, 2rem);
+    font-weight: 700;
+    text-transform: lowercase;
+    letter-spacing: 0.03em;
+}
+
+.specimen-card-portrait .specimen-media {
+    aspect-ratio: 3 / 4;
+}
+
+.specimen-card-vertical .specimen-media {
+    aspect-ratio: 3 / 4;
+}
+
+.specimen-card-small .specimen-media {
+    aspect-ratio: 3 / 2;
+}
+
+.specimen-card figcaption {
+    margin-top: 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.58);
+}
+
+.project-aside-stack {
+    display: grid;
+    gap: 54px;
+    align-content: start;
+}
+
 .project-video-container {
     max-width: 1200px;
     margin: 0 auto 40px;
@@ -474,6 +599,7 @@ footer {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    margin-top: 192px;
 }
 
 body[data-page="project"] main {
@@ -614,6 +740,14 @@ p {
     .artist-name {
         font-size: 6rem;
     }
+
+    .project-hero-video.desktop {
+        display: block;
+    }
+
+    .project-hero-video.mobile {
+        display: none;
+    }
 }
 
 @media (max-width: 768px) {
@@ -713,8 +847,45 @@ p {
         margin-bottom: 32px;
     }
 
+    .project-hero,
+    .project-hero-image,
+    .project-hero video {
+        min-height: 56vh;
+    }
+
+    .project-shell {
+        width: min(100%, calc(100% - 32px));
+        padding-top: 36px;
+    }
+
+    .project-hero-copy {
+        left: 24px;
+        right: 24px;
+        bottom: 26px;
+    }
+
+    .project-intro-grid,
+    .project-aside-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        margin-bottom: 72px;
+    }
+
+    .project-intro-copy {
+        max-width: none;
+    }
+
+    .specimen-strip {
+        margin-bottom: 72px;
+    }
+
+    .project-aside-stack {
+        gap: 24px;
+    }
+
     .project-pagination {
         margin-bottom: 0;
+        margin-top: 112px;
     }
 
     body[data-page="project"] main {

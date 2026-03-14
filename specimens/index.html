@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Title | Paweł Grzelak</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicons/apple-touch-icon.png">
+    <link rel="icon" href="../assets/favicons/favicon.ico" sizes="any">
+</head>
+<body data-page="project" data-project="specimens">
+
+    <nav id="main-nav">
+        <div class="nav-container">
+            <a href="../#landing" class="logo">PG</a>
+            <button class="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="../#work">Work</a></li>
+                <li><a href="../#about">About</a></li>
+                <li><a href="../#tutorials">Tutorials</a></li>
+                <li><a href="../#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <header class="project-hero">
+            <video class="project-hero-video desktop" autoplay muted loop playsinline preload="metadata" poster="../specimens/1174x788_spec_a.jpg">
+                <source src="../specimens/specimens_landing-desktop.mp4" type="video/mp4" media="(min-width: 768px)">
+                Your browser does not support the video tag.
+            </video>
+            <video class="project-hero-video mobile" autoplay muted loop playsinline preload="metadata" poster="../specimens/1174x788_spec_a.jpg">
+                <source src="../specimens/specimens_landing-mobile.mp4" type="video/mp4" media="(max-width: 767px)">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay-gradient"></div>
+            <div class="project-hero-copy reveal active">
+                <h1 class="project-title">Project Title</h1>
+                <p class="artist-subtitle project-subtitle">Category / Year</p>
+            </div>
+        </header>
+
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <div class="arrow">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <section class="project-shell">
+            <section class="project-intro-grid reveal">
+                <div class="project-intro-copy">
+                    <p class="project-copy">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p>In 1960, we accomplished a historic feat when we set foot on the deepest known point on the Earth's surface. Since then, vast stretches of the ocean floor have remained largely unseen, waiting to be discovered.</p>
+                </div>
+
+                <figure class="specimen-card specimen-card-portrait">
+                    <div class="specimen-media specimen-media-placeholder">
+                        <span>video</span>
+                    </div>
+                    <figcaption>Specimen A</figcaption>
+                </figure>
+            </section>
+
+            <section class="specimen-strip reveal">
+                <figure class="specimen-card">
+                    <img class="specimen-media" src="../specimens/1174x788_spec_b.jpg" alt="Specimens study B" loading="lazy">
+                    <figcaption>Specimen B</figcaption>
+                </figure>
+            </section>
+
+            <section class="specimen-strip reveal">
+                <figure class="specimen-card">
+                    <img class="specimen-media" src="../specimens/1174x788_spec_c.jpg" alt="Specimens study C" loading="lazy">
+                    <figcaption>Specimen C</figcaption>
+                </figure>
+            </section>
+
+            <section class="project-aside-grid reveal">
+                <figure class="specimen-card specimen-card-vertical">
+                    <img class="specimen-media" src="../specimens/1174x788_spec_d.jpg" alt="Specimens study D" loading="lazy">
+                    <figcaption>Specimen D</figcaption>
+                </figure>
+
+                <div class="project-aside-stack">
+                    <figure class="specimen-card specimen-card-small">
+                        <img class="specimen-media" src="../specimens/587x394_spec_c_portugese_man_o_war.jpg" alt="Portuguese man o' war still from Specimens" loading="lazy">
+                    </figure>
+
+                    <div class="project-aside-copy">
+                        <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-pagination reveal" aria-label="Project navigation">
+                <div class="project-nav-links">
+                    <a href="../mushrooms/" class="project-nav-link project-nav-prev">
+                        <span class="project-nav-label">Prev</span>
+                        <strong class="project-nav-name">Previous Project</strong>
+                    </a>
+                    <a href="../specimens-vol2/" class="project-nav-link project-nav-next">
+                        <span class="project-nav-label">Next</span>
+                        <strong class="project-nav-name">Next Project</strong>
+                    </a>
+                </div>
+                <a href="../" class="back-link">
+                    <span class="back-link-arrow" aria-hidden="true"></span>
+                    <span>Back to all projects</span>
+                </a>
+            </section>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Paweł Grzelak. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../scripts/lenis.min.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>
