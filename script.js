@@ -6,6 +6,13 @@ const PROJECTS = {
         poster: 'specimens/1174x788_spec_a.jpg',
         video: 'assets/specimens_vol2-desktop-desktop-1440x810.mp4'
     },
+    'gemmules': {
+        title: 'Gemmules',
+        subtitle: 'Personal / 2022',
+        description: 'Short-form motion studies built from clustered organic forms and repeated structures.',
+        poster: 'assets/gemmules-desktop-desktop-poster.jpg',
+        video: 'assets/gemmules-desktop-desktop-1440x810.mp4'
+    },
     'specimens-vol2': {
         title: 'Specimens vol2',
         subtitle: 'Personal Animation / 2026',

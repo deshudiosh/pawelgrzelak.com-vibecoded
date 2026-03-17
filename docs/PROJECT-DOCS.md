@@ -31,6 +31,12 @@ Static portfolio site for a 3D artist. The site is video-first, runs on GitHub P
 - Blurred, semi-transparent navigation once the user scrolls past the landing threshold.
 - Clean, minimal typography and restrained motion.
 
+### Project Subpages
+
+- The `specimens/` page is the reference implementation for how future project subpages should look and behave.
+- New project subpages should follow the `specimens/` layout logic: full-viewport hero media, overlaid project title, the same horizontal content margins as the homepage, and media-led modular sections below.
+- Reuse the `specimens/` spacing, header behavior, footer behavior, and responsive structure unless there is an explicit reason to diverge.
+
 ## Current Behavior
 
 - The landing section fills the viewport.
@@ -134,4 +140,4 @@ pawelgrzelak.com-vibecoded/
 - Keep secrets and API keys out of repository documentation.
 - If implementation details drift, the source of truth is the actual codebase, not this file.
 
-*Last updated: 2026-03-08*
+*Last updated: 2026-03-17*

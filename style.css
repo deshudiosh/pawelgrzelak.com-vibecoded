@@ -408,6 +408,19 @@ main {
     color: #e6e0d4; /* Change color on hover (match bg) */
 }
 
+.project-card-gemmules {
+    border: 1px solid #3a3a3a;
+}
+
+.project-card-gemmules h3 {
+    color: #000;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.72);
+}
+
+.project-card-gemmules:hover h3 {
+    color: rgba(0, 0, 0, 0.72);
+}
+
 /* Footer */
 footer {
     padding: 24px 20px;
@@ -429,7 +442,10 @@ footer {
 
 .project-hero {
     position: relative;
-    min-height: 72vh;
+    height: 100vh;
+    height: 100svh;
+    min-height: 100vh;
+    min-height: 100svh;
     background: #607680;
     overflow: hidden;
 }
@@ -439,7 +455,8 @@ footer {
 .project-hero-video {
     width: 100%;
     height: 100%;
-    min-height: 72vh;
+    min-height: 100vh;
+    min-height: 100svh;
     object-fit: cover;
     display: block;
 }
@@ -453,9 +470,21 @@ footer {
 }
 
 .project-shell {
-    width: min(1200px, calc(100% - 40px));
-    margin: 0 auto;
+    width: 100%;
     padding-top: 72px;
+    padding-inline: 20px;
+}
+
+.project-shell-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (min-width: 769px) {
+    .project-shell-inner {
+        max-width: 1440px;
+        width: min(1440px, calc(100% - clamp(96px, 12vw, 192px)));
+    }
 }
 
 .project-hero-copy {
@@ -849,13 +878,21 @@ p {
 
     .project-hero,
     .project-hero-image,
-    .project-hero video {
-        min-height: 56vh;
+    .project-hero video,
+    .project-hero-video {
+        height: 100vh;
+        height: 100svh;
+        min-height: 100vh;
+        min-height: 100svh;
     }
 
     .project-shell {
-        width: min(100%, calc(100% - 32px));
         padding-top: 36px;
+        padding-inline: 16px;
+    }
+
+    .project-shell-inner {
+        width: 100%;
     }
 
     .project-hero-copy {
